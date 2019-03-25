@@ -37,7 +37,7 @@ class ActivityController extends \yii\web\Controller
     public function actionView(){
 
 
-        $activity = new Activity();
+        $activity = \Yii::$app->activity->getModel();
 
 
         return $this->render('view',
@@ -51,7 +51,8 @@ class ActivityController extends \yii\web\Controller
     public function actionCreate()
     {
         //return "Создание активности";
-        $activity = new Activity();
+        $activity = \Yii::$app->activity->getModel();
+
         if ($activity->load(Yii::$app->request->post())){
             if ($activity->validate()) {
                 //return "Создание активности";
