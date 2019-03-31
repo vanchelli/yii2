@@ -24,6 +24,12 @@ use yii\base\Model;
 class Activity extends Model
 {
 
+
+    /**
+     * @var integer
+     */
+    public $actv_id;
+
     /**
      * @var string
      */
@@ -32,14 +38,14 @@ class Activity extends Model
     /**
      * @var int
      */
-    public $startDay;
+    public $start_date;
 
-    public $endDay;
+    public $end_date;
 
     /**
      * @var id автора
      */
-    public $idAuthor;
+    public $usr_usr_id;
 
     /**
      * описание события
@@ -47,22 +53,27 @@ class Activity extends Model
      */
     public $description;
 
-    public $isBlocked;
+    public $is_blocked;
 
-    public $isRepeated;
+    public $is_repeated;
+
+
+    public $navi_date;
 
     public function attributeLabels()
     {
 
         return
                 [
-                    'title'         => 'Название события',
-                    'startDay'      => 'Дата начала',
-                    'endDay'        => 'Дата окончания',
-                    'idAuthor'      => 'Автор',
-                    'description'   => 'Описание',
-                    'isBlocked'     => 'На весь день?',
-                    'isRepeated'    => 'Повторяющееся событие'
+                    'actv_id'        => 'Идентификатор события',
+                    'title'          => 'Название события',
+                    'start_date'     => 'Дата начала',
+                    'end_date'       => 'Дата окончания',
+                    'usr_usr_id'     => 'Автор',
+                    'description'    => 'Описание',
+                    'is_blocked'     => 'На весь день?',
+                    'is_repeated'    => 'Повторяющееся событие',
+                    'navi_date'      => 'Дата записи'
                 ];
 
     }
@@ -70,11 +81,11 @@ class Activity extends Model
     public function rules(){
 
         return [
-            [['endDay'],'default','value'=>$this->startDay],
-            [['title','startDay','endDay','idAuthor','description'],'required'],
-
-            [['isBlocked'],'boolean'],
-            [['isRepeated'],'boolean'],
+            [['end_date'],'default','value'=>$this->start_date],
+            [['title','start_date','end_date','usr_usr_id','description'],'required'],
+            [['start_date','end_date'],'date','format' => 'yyyy-M-d H:m:s'],
+            [['is_blocked'],'boolean'],
+            [['is_repeated'],'boolean'],
 
 
         ];
